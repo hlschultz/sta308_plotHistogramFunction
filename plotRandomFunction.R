@@ -29,16 +29,16 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5) {
 }
 
 plotRandom <- function(n=1, mu=0, sigma=1, hist_breaks=6) { ## Change to Greek symbols only to not reuse words
+  if(n < 0) {
+    stop("Sample size n must be positive") ## error message changed to Error in plotRandom(n = -20) : Sample size n must be positive
+  }
   if ( !is.wholenumber(n) ) {
     warning(paste("Sample size n should be a whole number \n R is using n=floor(n)=", floor(n)))
   }
-  if(n < 0) {
-    stop("Sample size n must be positive") ## error message changed to Error in plotRandom(n = -20) : Sample size n must be positive
-  } else {
-    hist(rnorm(n=n, mean=mu, sd=sigma),
-         breaks=hist_breaks)
+  
+  hist(rnorm(n=n, mean=mu, sd=sigma),
+    breaks=hist_breaks)
   }
-}
 ## Note tester fails if mu and sigma are "missing, with no default"
 ## Functions always need default parameters
 ## Ranges are 'bins'
